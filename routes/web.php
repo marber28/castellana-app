@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SeguimientoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\SeguimientoController::class, 'index'])->name('home');
+
+//Route::resource('seguimiento', SeguimientoController::class);
+Route::get('/seguimiento', [App\Http\Controllers\SeguimientoController::class, 'index'])->name('seguimiento.index');
+Route::post('/seguimiento', [App\Http\Controllers\SeguimientoController::class, 'store'])->name('seguimiento.index');
+Route::post('/seguimiento/update', [App\Http\Controllers\SeguimientoController::class, 'update'])->name('seguimiento.update');
+Route::get('/busqueda', [App\Http\Controllers\SeguimientoController::class, 'search'])->name('search.index');
+Route::post('/busqueda', [App\Http\Controllers\SeguimientoController::class, 'show'])->name('search');
