@@ -130,6 +130,7 @@
             <div class="card">
                 <div class="card-header">Listado de Seguimiento</div>
                 <div class="card-body">
+                    <a class="btn btn-primary" href="/busqueda">Buscar seguimiento</a>
                 	@if ($trackings->count())
                 	<ul class="list-inline tracking-list">
                 		@foreach ($trackings as $tracking)

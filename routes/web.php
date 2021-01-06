@@ -14,17 +14,21 @@ use App\Http\Controllers\SeguimientoController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['guest:' . config('admin-auth.defaults.guard')])->group(function () {
+	Route::get('/', function () {
+	    return view('auth.login');
+	});
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\SeguimientoController::class, 'index'])->name('home');
+Route::middleware(['auth:' . config('admin-auth.defaults.guard')])->group(function () {
+	Route::get('/home', [App\Http\Controllers\SeguimientoController::class, 'index'])->name('home');
 
-//Route::resource('seguimiento', SeguimientoController::class);
-Route::get('/seguimiento', [App\Http\Controllers\SeguimientoController::class, 'index'])->name('seguimiento.index');
-Route::post('/seguimiento', [App\Http\Controllers\SeguimientoController::class, 'store'])->name('seguimiento.index');
-Route::post('/seguimiento/update', [App\Http\Controllers\SeguimientoController::class, 'update'])->name('seguimiento.update');
-Route::get('/busqueda', [App\Http\Controllers\SeguimientoController::class, 'search'])->name('search.index');
-Route::post('/busqueda', [App\Http\Controllers\SeguimientoController::class, 'show'])->name('search');
+	//Route::resource('seguimiento', SeguimientoController::class);
+	Route::get('/seguimiento', [App\Http\Controllers\SeguimientoController::class, 'index'])->name('seguimiento.index');
+	Route::post('/seguimiento', [App\Http\Controllers\SeguimientoController::class, 'store'])->name('seguimiento.index');
+	Route::post('/seguimiento/update', [App\Http\Controllers\SeguimientoController::class, 'update'])->name('seguimiento.update');
+	Route::get('/busqueda', [App\Http\Controllers\SeguimientoController::class, 'search'])->name('search.index');
+	Route::post('/busqueda', [App\Http\Controllers\SeguimientoController::class, 'show'])->name('search');
+});
